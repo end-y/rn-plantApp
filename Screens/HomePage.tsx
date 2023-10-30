@@ -109,7 +109,6 @@ export default function HomeScreen():JSX.Element{
                 </View>
             }
         </View>
-
         </ScrollView>
 
     );

@@ -29,7 +29,7 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const toggleColorScheme = () => {
     setColors((prevColors) => ({
         ...prevColors,
-        colorMain: prevColors.colorMain === '#fff' ? '#dedede' : '#fff',
+        colorMain:  '#dedede',
         textColorSlider: '#13231B',
         greenButtonColor: '#28AF6E',
         linkColor:"rgba(89, 113, 101, 0.70)",

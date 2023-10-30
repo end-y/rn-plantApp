@@ -12,8 +12,8 @@ import { FC } from "react";
 import { ScreenPropsGeneral } from "../Types/Screen";
 import { useDispatch, useSelector } from "react-redux";
 import { DimensionProvider } from "../Providers/Dimensions/type";
-import { ActiveIndexProvider } from "../Providers/ActiveIndex/type";
 import { setActiveIndex } from "../Providers/ActiveIndex/actions";
+import LinearGradient from "react-native-linear-gradient";
 export default function SliderScreen({navigation}:ScreenPropsGeneral): JSX.Element {
     const {width} = useSelector((state:DimensionProvider) => state.dimension);
     const dispatch = useDispatch()
@@ -25,30 +25,40 @@ export default function SliderScreen({navigation}:ScreenPropsGeneral): JSX.Eleme
                     <View style={{flex:1,}}>
                         <Image source={Content} style={{alignSelf:"center",  objectFit:"cover"}} />
                     </View>
-                    <BigGreenButton text="Continue" func={() => dispatch(setActiveIndex(2))} />
+                    <View style={{zIndex:1}}>
+                        <BigGreenButton text="Continue" func={() => dispatch(setActiveIndex(2))} />
+                    </View>
                 </View>
+                
             </ImageBackground>
         )
     }
     const SecondSlide:FC = () => {
         return (
-            <ImageBackground source={PlantBG} style={{width:width, justifyContent:"center", padding:30}}>
-                <View style={{justifyContent:"center", flex:1}}>
-                    <TonicText text="Get plant care guides" underline={true} addMarginBottom={80} tonic="care guides" />
-                    <View style={{flex:1,position:"relative",}}>
-                        <Image source={Artwork} style={{alignSelf:"center",  objectFit:"cover", position:"absolute", zIndex:1, top:-60, right:-30}} />
-                        <Image source={FlatPhone} style={{alignSelf:"center",  objectFit:"cover"}} />
-                    </View>
+        <View style={{width:width,justifyContent:"center", padding:30, backgroundColor:"white"}}>
+        <ImageBackground resizeMode={"repeat"} source={PlantBG} style={{width:width,  height:500, transform:[{rotate:"80deg"}], position:"absolute"}} />
+            <View style={{justifyContent:"center", flex:1}}>
+                <TonicText text="Get plant care guides" underline={true} addMarginBottom={80} tonic="care guides" />
+                <View style={{flex:1,position:"relative",}}>
+                    <Image source={Artwork} style={{alignSelf:"center",  objectFit:"cover", position:"absolute", zIndex:1, top:-60, right:-30}} />
+                    <Image source={FlatPhone} style={{alignSelf:"center",  objectFit:"cover"}} />
+                </View>
+                <View style={{zIndex:1}}>
                     <BigGreenButton text="Continue" func={() => dispatch(setActiveIndex(2))} />
                 </View>
-            </ImageBackground>
+            </View>
+            <LinearGradient style={{height:300, position:"absolute", bottom:0, width:"100%"}} colors={['transparent',  'white']} />
+        </View>
         )
     }
     return(
+        <>
         <Slider>
             <FirstSlide />
             <SecondSlide />
             <ModalComponent navigation={navigation} />
         </Slider>
+        </>
+
     )
 }

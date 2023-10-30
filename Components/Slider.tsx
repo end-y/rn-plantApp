@@ -17,7 +17,7 @@ const Slider:FC<SliderProps> = ({ children }) => {
   const scrollViewRef = useRef<ScrollView | null>(null);
 
   const itemWidth = width
-
+  const [color,setColor] = useState("rgb(243,243,243)")
   const handleScroll = (event: any) => {
     const xOffset = event.nativeEvent.contentOffset.x;
     const index = Math.round(xOffset / itemWidth);
@@ -36,6 +36,7 @@ const Slider:FC<SliderProps> = ({ children }) => {
       if(activeIndex == 1){
         scrollViewRef.current.scrollTo({ x: (activeIndex) * itemWidth, animated: true });
       }
+      setColor(activeIndex == 1 ? "white" : "rgb(243,243,243)")
   }, [activeIndex]);
   return (
     <> 
@@ -43,7 +44,7 @@ const Slider:FC<SliderProps> = ({ children }) => {
         {children}
       </ScrollView>
       {[0,1].some(e => e== activeIndex) &&
-      <View style={{justifyContent:"center", alignItems:"center", flexDirection:"row", gap:6, marginBottom:30}}>
+      <View style={{justifyContent:"center", backgroundColor:color, alignItems:"center", flexDirection:"row", height:30, paddingBottom:30, gap:6}}>
         {new Array(children.length).fill(0).map((e,i) => {
           return(
             <View style={active(i)} />
